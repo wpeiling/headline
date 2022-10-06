@@ -67,6 +67,7 @@ export default {
       this.initArtList()
     },
     onRefresh () {
+      this.$toast('刷新成功')
       this.initArtList(true)
     },
     removeArticle (id) {

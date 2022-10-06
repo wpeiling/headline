@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="artitem-container">
     <van-cell>
       <!-- 标题区域的插槽 -->
       <template #title>
@@ -17,8 +17,8 @@
       <!-- label 区域的插槽 -->
       <template #label>
         <div class="label-box">
-          <span>作者{{article.aut_name}}{{article.cover.type}} &nbsp;&nbsp; {{article.comm_count}}评论 &nbsp;&nbsp;
-            发布日期{{article.pubdate |
+          <span>作者:{{article.aut_name}}{{article.cover.type}} &nbsp;&nbsp; {{article.comm_count}}评论 &nbsp;&nbsp;
+            发布日期:{{article.pubdate |
             dateFormate}}</span>
           <!-- 关闭按钮 -->
           <van-icon name="cross" @click.stop="show = true" />
@@ -101,8 +101,18 @@ export default {
     },
     // 举报文章
     async reportArticle (type) {
-      const { data: res } = await reportsArticleAPI(this.artId, type)
-      if (res.message === 'OK') {
+      try {
+        const { data: res } = await reportsArticleAPI(this.artId, type)
+        if (res.message === 'OK') {
+          this.$emit('remove-article', this.artId)
+          this.show = false
+        }
+      } catch (err) {
+        if (err.response.data.message === 'OK') {
+          this.$emit('remove-article', this.artId)
+          this.show = false
+        }
+      } finally {
         this.$emit('remove-article', this.artId)
         this.show = false
       }
@@ -113,6 +123,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.artitem-container {
+  margin-bottom: 4px;
+}
+
 .label-box {
   display: flex;
   justify-content: space-between;

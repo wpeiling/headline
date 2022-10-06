@@ -24,8 +24,23 @@ export const dislikeArticleAPI = (id) => {
 
 // 举报文章
 export const reportsArticleAPI = (id, type) => {
-  return request.post(' /v1_0/article/reports', {
+  return request.post('/v1_0/article/reports', {
     target: id,
     type
+  })
+}
+
+// 获取所有频道列表
+export const getAllchannelAPI = () => {
+  return request.get('/v1_0/channels')
+}
+
+// 更新用户频道列表数据
+// export const updateUserchannelAPI = () => {
+//   return request.get('/v1_0/user/channels')
+// }
+export const updateUserChannelAPI = channels => {
+  return request.put('/v1_0/user/channels', {
+    channels
   })
 }
