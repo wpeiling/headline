@@ -5,7 +5,8 @@
       <!-- 上拉加载 -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :immediate-check="false">
         <!-- 文章列表 -->
-        <art-item v-for="(item,index) in artlist" :key="index" :article="item"></art-item>
+        <art-item v-for="(item,index) in artlist" :key="index" :article="item" @remove-article="removeArticle">
+        </art-item>
       </van-list>
     </van-pull-refresh>
   </div>
@@ -67,6 +68,12 @@ export default {
     },
     onRefresh () {
       this.initArtList(true)
+    },
+    removeArticle (id) {
+      this.artlist = this.artlist.filter(o => o.art_id.toString() !== id)
+      if (this.artlist.length < 10) {
+        this.initArtList()
+      }
     }
   }
 }
