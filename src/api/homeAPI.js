@@ -36,11 +36,17 @@ export const getAllchannelAPI = () => {
 }
 
 // 更新用户频道列表数据
-// export const updateUserchannelAPI = () => {
-//   return request.get('/v1_0/user/channels')
-// }
 export const updateUserChannelAPI = channels => {
   return request.put('/v1_0/user/channels', {
     channels
+  })
+}
+
+// 获取搜索结果
+export const getSuggestListAPI = kw => {
+  return request.get('/v1_0/search', {
+    params: {
+      q: kw
+    }
   })
 }
