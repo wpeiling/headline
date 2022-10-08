@@ -47,7 +47,10 @@ export default {
         this.$toast('登录成功')
         // 登录后操作
         this.updataTokenInfo(res.data)
-        this.$router.push('/')
+        // this.$router.push('/')
+        console.log(this.$route.query.pre)
+        const navPath = this.$route.query.pre || '/'
+        this.$router.push(navPath)
       }
     }
   }

@@ -166,4 +166,8 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+/deep/.van-nav-bar .van-icon {
+  color: #f5f5f5;
+}
 </style>
