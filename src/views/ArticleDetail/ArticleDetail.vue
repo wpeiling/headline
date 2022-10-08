@@ -31,7 +31,6 @@
 
       <!-- 分割线 -->
       <van-divider>End</van-divider>
-
       <!-- 点赞 -->
       <div class="like-box">
         <van-button icon="good-job" type="danger" size="small" v-if="article.attitude === 1" @click="setDislike">已点赞
@@ -39,14 +38,21 @@
         <van-button icon="good-job-o" type="danger" plain size="small" v-else @click="setLike">点赞</van-button>
       </div>
     </div>
+
+    <!-- 评论 -->
+    <art-cmt :art-id="id"></art-cmt>
   </div>
 </template>
 
 <script>
 import { getArticleDetailAPI, followUserAPI, unfollowUserAPI, addLikeAPI, delLikeAPI } from '@/api/articleAPI'
+import ArtCmt from '@/components/ArtCmt/ArtCmt.vue'
 export default {
   name: 'ArticleDetail',
   props: ['id'],
+  components: {
+    ArtCmt
+  },
   data () {
     return {
       article: ''
