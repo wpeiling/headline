@@ -72,9 +72,7 @@ export default {
     async setFollow () {
       try {
         const { data: res } = await followUserAPI(this.article.aut_id.toString())
-        console.log(res)
         if (res.message === 'OK') {
-          console.log('111')
           this.$toast('关注用户成功')
           this.article.is_followed = true
         }

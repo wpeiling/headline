@@ -43,7 +43,6 @@ export default {
     ...mapMutations(['updataTokenInfo']),
     async login () {
       const { data: res } = await loginAPI(this.form)
-      console.log(res)
       if (res.message === 'OK') {
         this.$toast('登录成功')
         // 登录后操作

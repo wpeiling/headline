@@ -51,7 +51,6 @@ export default {
       const { data: res } = await getSuggestListAPI(this.kw)
       if (res.message === 'OK') {
         this.changeColor(res.data.results)
-        console.log(res.data.results)
         this.suggestlist = res.data.results
         // 把搜索关键词加入到搜索历史中
         const newHistory = this.history.filter(x => x !== this.kw)

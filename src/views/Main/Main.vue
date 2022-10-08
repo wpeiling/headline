@@ -2,21 +2,17 @@
   <div>
     <router-view></router-view>
 
-    <van-tabbar v-model="active" route>
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="user-o">我的</van-tabbar-item>
+    <van-tabbar route>
+      <!-- to 属性：点击后要跳转到的路由地址 -->
+      <van-tabbar-item icon="home-o" to="/home">首页</van-tabbar-item>
+      <van-tabbar-item icon="user-o" to="/user">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Main',
-  data () {
-    return {
-      active: 0
-    }
-  }
+  name: 'Main'
 }
 </script>
 

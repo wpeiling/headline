@@ -98,7 +98,6 @@ export default {
           }
         }
       } else if (name === '拉黑作者') {
-        console.log('拉黑作者')
         this.show = false
       } else if (name === '反馈垃圾内容') {
         // 开启二级面板

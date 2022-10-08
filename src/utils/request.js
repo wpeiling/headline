@@ -1,15 +1,14 @@
 import axios from 'axios'
 import { Toast } from 'vant'
-import store from '@/store'
+import store from '@/store/index.js'
 
 // 调用 axios.create() 方法，创建 axios 的实例对象
 const request = axios.create({
-  // 请求根路径
   baseURL: 'http://toutiao.itheima.net'
 })
 
 // 添加请求拦截器
-axios.interceptors.request.use(
+request.interceptors.request.use(
   function (config) {
     Toast.loading({
       message: '加载中...', // 文本内容
@@ -30,7 +29,7 @@ axios.interceptors.request.use(
 )
 
 // 添加响应拦截器
-axios.interceptors.response.use(
+request.interceptors.response.use(
   function (response) {
     Toast.clear()
     return response
