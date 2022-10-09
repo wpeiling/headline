@@ -94,7 +94,8 @@ export default {
     // 跳转到搜索结果页
     gotoSearchResult (e) {
       const kw = e.currentTarget.innerText
-      this.$router.push({ path: `/search/ ${kw}`, query: { kw } })
+      // this.$router.push({ path: `/search/ ${kw}`, query: { kw } })
+      this.$router.push('/search/' + kw)
     }
   },
   mounted () {

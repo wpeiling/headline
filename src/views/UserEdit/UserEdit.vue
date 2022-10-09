@@ -112,18 +112,17 @@ export default {
       console.log(value)
     },
     // 选中的文件发生了变化
-    onFileChange (e) {
+    async onFileChange (e) {
       // 获取到用户选择的文件列表
       const files = e.currentTarget.files
       if (files.length === 0) return
       const fd = new FormData()
       fd.append('photo', files[0])
-      const { data: res } = updateUserAvatarAPI(fd)
-      console.log(res)
-      // if (res.message === 'OK') {
-      //   this.initUserProfile()
-      //   this.$notify({ type: 'success', message: '头像修改成功', duration: 1000 })
-      // }
+      const { data: res } = await updateUserAvatarAPI(fd)
+      if (res.message === 'OK') {
+        this.initUserProfile()
+        this.$notify({ type: 'success', message: '头像修改成功', duration: 600 })
+      }
     }
 
   },

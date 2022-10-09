@@ -58,6 +58,7 @@ export default {
       article: ''
     }
   },
+
   created () {
     this.initArticle()
   },
