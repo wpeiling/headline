@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { Toast } from 'vant'
 import store from '@/store/index.js'
+import { exchangeTokenAPI } from '@/api/userAPI.js'
+import router from '@/router'
 
 // 调用 axios.create() 方法，创建 axios 的实例对象
 const request = axios.create({
@@ -31,11 +33,26 @@ request.interceptors.request.use(
 // 添加响应拦截器
 request.interceptors.response.use(
   function (response) {
+    // 隐藏 loading 提示效果
     Toast.clear()
     return response
   },
 
   function (error) {
+    Toast.clear()
+    const tokenInfo = store.state.tokenInfo
+    if (error.response && error.response.status === 401 && tokenInfo.refresh_token) {
+      console.log('token过期啦')
+      try {
+        const { data: res } = exchangeTokenAPI(tokenInfo.refresh_token)
+        store.commit('updataTokenInfo', { token: res.tokenInfo.token, refresh_token: tokenInfo.refresh_token })
+
+        return request(error.config)
+      } catch (error) {
+        store.commit('cleanState')
+        router.replace('/login?pre=' + router.currentRoute.fullPath)
+      }
+    }
     return Promise.reject(error)
   }
 )
